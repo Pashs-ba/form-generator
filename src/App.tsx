@@ -1,22 +1,42 @@
+
 import {ElementType, Form} from "../lib/main.ts";
 
 function App() {
 
   return (
-    <>
         <Form
             title={"Form test"}
             elements={[
             {
                 label: "one",
-                type: ElementType.TEXT_INPUT
+                name: "one",
+                type: ElementType.TEXT_INPUT,
+                properties: {
+                    type: "text"
+                }
             },
             {
                 label: "two",
-                type: ElementType.TEXT_INPUT
-            }]}
+                name: "two",
+                type: ElementType.TEXT_INPUT,
+                properties: {
+                    type: "text"
+                }
+            },
+            {
+              label: "select",
+              name: "select",
+              type: ElementType.SELECT,
+              properties: {
+                options: [
+                  {value: "one", label: "one"},
+                  {value: "two", label: "two"},
+                  {value: "three", label: "three"},
+                ]
+              }
+            }
+          ]}
         />
-    </>
   )
 }
 
