@@ -11,6 +11,7 @@ function App() {
                 label: "one",
                 name: "one",
                 type: ElementType.TEXT_INPUT,
+                defaultValue: "default",
                 properties: {
                     type: "text"
                 }
@@ -27,7 +28,9 @@ function App() {
               label: "select",
               name: "select",
               type: ElementType.SELECT,
+              defaultValue: ["two", "three"],
               properties: {
+                multiple: true,
                 options: [
                   {value: "one", label: "one"},
                   {value: "two", label: "two"},

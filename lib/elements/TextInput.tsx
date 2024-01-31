@@ -1,13 +1,15 @@
 import React from "react"
 
 export type TextInputProps = {
-    type?: string
+    type?: string,
+    
 }
 type _TextInputProps = TextInputProps & {
     onChange: (data: string) => void
+    defaultValue?: string
 }
-export default function TextInput({ onChange, type }: Readonly<_TextInputProps>) {
-    const [value, setValue] = React.useState<string>("")
+export default function TextInput({ onChange, type, defaultValue }: Readonly<_TextInputProps>) {
+    const [value, setValue] = React.useState<string>(defaultValue? defaultValue : "")
     return (
         <input
             type={type}

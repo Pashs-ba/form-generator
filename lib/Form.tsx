@@ -8,6 +8,7 @@ type Element = {
     name: string,
     type: ElementType,
     properties: SelectProps | TextInputProps,
+    defaultValue?: string | string[]
 
 }
 export type FormProps = {
@@ -21,13 +22,15 @@ function get_element_by_type(element: Element, data: any, setData: React.Dispatc
             return (
                 <TextInput
                     {...element.properties as TextInputProps}
-                    onChange={(changed) => { setData({ ...data, [element.name]: changed }) }} />
+                    onChange={(changed) => { setData({ ...data, [element.name]: changed }) }}
+                    defaultValue={element.defaultValue as string|undefined} />
             )
         case ElementType.SELECT:
             return (
                 <Select
                     {...element.properties as SelectProps}
-                    onChange={(changed) => { setData({ ...data, [element.name]: changed }) }} />
+                    onChange={(changed) => { setData({ ...data, [element.name]: changed }) }}
+                    defaultValue={element.defaultValue} />
             )
         default:
             throw new Error("Unknown element type")
@@ -53,6 +56,10 @@ function init_data(elements: Element[]): any {
         if (element.type === ElementType.SELECT) {
             data[element.name] = (element.properties as SelectProps).multiple ? [] : (element.properties as SelectProps).options[0].value
         }
+        if (element.defaultValue) {
+            data[element.name] = element.defaultValue
+        }
+        
     })
     return data
 }
