@@ -37,6 +37,12 @@ function App() {
                   {value: "three", label: "three"},
                 ]
               }
+            },
+            {
+              label: "checkbox",
+              name: "checkbox",
+              type: ElementType.CHECKBOX,
+              properties: {}
             }
           ]}
         />

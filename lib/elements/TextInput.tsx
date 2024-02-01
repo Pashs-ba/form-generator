@@ -9,7 +9,7 @@ type _TextInputProps = TextInputProps & {
     defaultValue?: string
 }
 export default function TextInput({ onChange, type, defaultValue }: Readonly<_TextInputProps>) {
-    const [value, setValue] = React.useState<string>(defaultValue? defaultValue : "")
+    const [value, setValue] = React.useState<string>(defaultValue ?? "")
     return (
         <input
             type={type}
