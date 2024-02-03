@@ -6,6 +6,7 @@ function App() {
   return (
         <Form
             title={"Form test"}
+            onButtonClick={(data) => {console.log(data)}} 
             elements={[
             {
                 label: "one",

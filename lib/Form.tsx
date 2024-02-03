@@ -15,6 +15,7 @@ type Element = {
 export type FormProps = {
     title: string,
     elements: Element[]
+    onButtonClick: (data: any) => void
 }
 
 function get_element_by_type(element: Element, data: any, setData: React.Dispatch<any>): React.ReactNode {
@@ -40,8 +41,6 @@ function get_element_by_type(element: Element, data: any, setData: React.Dispatc
                     onChange={(changed) => { setData({ ...data, [element.name]: changed }) }}
                     defaultValue={element.defaultValue as string | undefined} />
             )
-        default:
-            throw new Error("Unknown element type")
     }
 }
 
@@ -68,8 +67,6 @@ function make_element(element: Element, data: any, setData: React.Dispatch<any>)
                     <label className="form-check-label">{element.label}</label>
                 </div>
             )
-        default:
-            throw new Error("Unknown element type")
     }
 
 }
@@ -92,7 +89,7 @@ function init_data(elements: Element[]): any {
 }
 
 
-export function Form({ title, elements }: Readonly<FormProps>) {
+export function Form({ title, elements, onButtonClick }: Readonly<FormProps>) {
     const [data, setData] = React.useState<any>({})
     useEffect(() => {
         setData(init_data(elements))
@@ -105,7 +102,7 @@ export function Form({ title, elements }: Readonly<FormProps>) {
             })}
             <button
                 className="btn btn-primary"
-                onClick={() => { console.log(data) }}>Submit</button>
+                onClick={() => { onButtonClick(data) }}>Submit</button>
         </>
     )
 }
