@@ -3,12 +3,13 @@ import { ElementType } from "./ElementType.ts";
 import TextInput, { TextInputProps } from "./elements/TextInput.tsx";
 import Select, { SelectProps } from "./elements/Select.tsx";
 import Checkbox, { CheckboxProps } from "./elements/Checkbox.tsx";
+import Radio, { RadioProps } from "./elements/Radio.tsx";
 //TODO fix string checkbox?
 type Element = {
     label: string,
     name: string,
     type: ElementType,
-    properties: SelectProps | TextInputProps | CheckboxProps,
+    properties: SelectProps | TextInputProps | CheckboxProps | RadioProps,
     defaultValue?: string | string[]
 
 }
@@ -41,6 +42,14 @@ function get_element_by_type(element: Element, data: any, setData: React.Dispatc
                     onChange={(changed) => { setData({ ...data, [element.name]: changed }) }}
                     defaultValue={element.defaultValue as string | undefined} />
             )
+        case ElementType.RADIO:
+            return (
+                <Radio
+                    {...element.properties as RadioProps}
+                    onChange={(changed) => { setData({ ...data, [element.name]: changed }) }}
+                    defaultValue={element.defaultValue as string | undefined}
+                    name={element.name} />
+            )
     }
 }
 
@@ -67,6 +76,15 @@ function make_element(element: Element, data: any, setData: React.Dispatch<any>)
                     <label className="form-check-label">{element.label}</label>
                 </div>
             )
+        case ElementType.RADIO:
+            return (
+                <div
+                    key={element.label}>
+                    <label className="form-label">{element.label}</label>
+                    {get_element_by_type(element, data, setData)}
+                </div>
+            )
+
     }
 
 }
