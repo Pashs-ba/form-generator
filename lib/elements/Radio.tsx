@@ -22,12 +22,16 @@ export default function Radio({ onChange, defaultValue, options, name }: Readonl
                         type="radio"
                         name={name}
                         checked={value === option}
+                        aria-labelledby={"id_" + option}
                         onChange={() => {
                             setValue(option);
                             onChange(option);
                         }}
                     />
-                    <label className="form-check-label">
+                    <label
+                        className="form-check-label"
+                        id={"id_" + option}
+                    >
                         {option}
                     </label>
                 </div>
@@ -35,3 +39,4 @@ export default function Radio({ onChange, defaultValue, options, name }: Readonl
         </>
     )
 }
+
