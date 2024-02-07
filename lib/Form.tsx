@@ -4,12 +4,13 @@ import TextInput, { TextInputProps } from "./elements/TextInput.tsx";
 import Select, { SelectProps } from "./elements/Select.tsx";
 import Checkbox, { CheckboxProps } from "./elements/Checkbox.tsx";
 import Radio, { RadioProps } from "./elements/Radio.tsx";
+import Textarea, { TextareaProps } from "./elements/Textarea.tsx";
 //TODO fix string checkbox?
 type Element = {
     label: string,
     name: string,
     type: ElementType,
-    properties: SelectProps | TextInputProps | CheckboxProps | RadioProps,
+    properties: SelectProps | TextInputProps | CheckboxProps | RadioProps | TextareaProps,
     defaultValue?: string | string[]
 
 }
@@ -50,6 +51,13 @@ function get_element_by_type(element: Element, data: any, setData: React.Dispatc
                     defaultValue={element.defaultValue as string | undefined}
                     name={element.name} />
             )
+        case ElementType.TEXTAREA:
+            return (
+                <Textarea
+                    {...element.properties as TextareaProps}
+                    onChange={(changed) => { setData({ ...data, [element.name]: changed }) }}
+                    defaultValue={element.defaultValue as string | undefined} />
+            )
     }
 }
 
@@ -57,6 +65,7 @@ function make_element(element: Element, data: any, setData: React.Dispatch<any>)
     switch (element.type) {
         case ElementType.TEXT_INPUT:
         case ElementType.SELECT:
+        case ElementType.TEXTAREA:
             return (
                 <div
                     className="mb-3"
@@ -94,7 +103,8 @@ function init_data(elements: Element[]): any {
     let data = {} as any
     elements.forEach((element) => {
         if (element.type === ElementType.SELECT) {
-            data[element.name] = (element.properties as SelectProps).multiple ? [] : (element.properties as SelectProps).options[0].value
+            data[element.name] = (element.properties as SelectProps).multiple ?
+                [] : (element.properties as SelectProps).options[0].value
         }
         if (element.type === ElementType.CHECKBOX) {
             data[element.name] = "false"

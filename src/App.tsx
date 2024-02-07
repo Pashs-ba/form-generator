@@ -57,6 +57,15 @@ function App() {
               "three",
             ]
           }
+        },
+        {
+          label: "textarea",
+          name: "textarea",
+          type: ElementType.TEXTAREA,
+          defaultValue: "default",
+          properties: {
+            rows: 10,
+          }
         }
       ]}
     />
