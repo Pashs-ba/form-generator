@@ -2,6 +2,8 @@ import { fireEvent, render } from "@testing-library/react"
 import { Form } from "../lib/Form"
 import React from "react"
 import { ElementType } from "../lib/ElementType"
+import '@testing-library/jest-dom'
+
 
 describe('Textarea', () => {
     test('Textarea test', () => {
@@ -56,5 +58,24 @@ describe('Textarea', () => {
                 ]} />) 
             fireEvent.click(container.getByRole('button'))
             expect(mock.mock.calls[0][0]).toEqual({ "textarea": "default" })
+    })
+    test('Textarea required test', () => {
+        const mock = jest.fn()
+        const container = render(
+            <Form
+                title='test'
+                onButtonClick={mock}
+                elements={[
+                    {
+                        type: ElementType.TEXTAREA,
+                        label: 'textarea',
+                        name: 'textarea',
+                        invalidText: 'invalid',
+                        required: true,
+                        properties: {}
+                    }
+                ]} />) 
+            fireEvent.click(container.getByRole('button'))
+            expect(container.getByText('invalid')).toBeInTheDocument()
     })
 })

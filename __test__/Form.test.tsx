@@ -51,5 +51,26 @@ describe('Form', () => {
     expect(container.getByText('custom')).toBeInTheDocument()
 
   })
+  test('Reqired default error text test', ()=>{
+    const mock = jest.fn()
+    const container = render(
+      <Form
+        title='test'
+        onButtonClick={mock}
+        defaultInvalidText='invalid'
+        elements={[
+          {
+            type: ElementType.TEXT_INPUT,
+            label: 'input',
+            name: 'input',
+            required: true,
+            properties: {}
+          }
+        ]} />)
+    const button = container.getByRole('button')
+    button.click()
+    expect(mock).not.toHaveBeenCalled()
+    expect(container.getByText('invalid')).toBeInTheDocument()
+  })
 
 })

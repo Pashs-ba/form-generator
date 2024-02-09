@@ -2,6 +2,8 @@ import { fireEvent, render } from "@testing-library/react"
 import { Form } from "../lib/Form"
 import { ElementType } from "../lib/ElementType"
 import React from "react"
+import '@testing-library/jest-dom'
+
 
 describe('Input', () => {
     test('Button click test', () => {
@@ -85,5 +87,27 @@ describe('Input', () => {
         fireEvent.click(container.getByRole('button'))
 
         expect(mock.mock.calls[0][0]).toEqual({ "input": "some" })
+    })
+    test('Input required test', () => {
+        const mock = jest.fn()
+        const container = render(
+            <Form
+                title='test'
+                onButtonClick={mock}
+                elements={[
+                    {
+                        type: ElementType.TEXT_INPUT,
+                        label: 'input',
+                        name: 'input',
+                        invalidText: 'invalid',
+                        required: true,
+                        properties: {}
+                    }
+                ]} />)
+
+        fireEvent.click(container.getByRole('button'))
+
+        expect(mock).not.toHaveBeenCalled()
+        expect(container.getByText('invalid')).toBeInTheDocument()
     })
 })
