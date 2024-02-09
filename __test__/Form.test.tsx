@@ -15,6 +15,7 @@ describe('Form', () => {
       expect(el.nodeName).toEqual('H1')
     })
   })
+  
   test('Elements test', () => {
     const container = render(
       <Form
@@ -30,6 +31,7 @@ describe('Form', () => {
         ]} />)
     expect(container.getByRole('textbox')).toBeInTheDocument()
   })
+
   test('Button test', () => {
     const container = render(
       <Form
@@ -37,6 +39,17 @@ describe('Form', () => {
         onButtonClick={() => { }}
         elements={[]} />)
     expect(container.getByRole('button')).toBeInTheDocument()
+  })
+
+  test('Custom Name', () => {
+    const container = render(
+      <Form
+        title='test'
+        onButtonClick={() => { }}
+        buttonText='custom'
+        elements={[]} />)
+    expect(container.getByText('custom')).toBeInTheDocument()
+
   })
 
 })

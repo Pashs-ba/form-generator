@@ -5,14 +5,13 @@ function App() {
 
   return (
     <Form
-      title={"Form test"}
       onButtonClick={(data) => { console.log(data) }}
+      buttonText="Отправить"
       elements={[
         {
           label: "one",
           name: "one",
           type: ElementType.TEXT_INPUT,
-          defaultValue: "default",
           properties: {
             type: "text"
           }
@@ -29,7 +28,7 @@ function App() {
           label: "select",
           name: "select",
           type: ElementType.SELECT,
-          defaultValue: ["two", "three"],
+          
           properties: {
             multiple: true,
             options: [
@@ -48,8 +47,9 @@ function App() {
         {
           label: "radio",
           name: "radio",
+          required: true,
           type: ElementType.RADIO,
-          defaultValue: "two",
+          invalidText: "Please select one",
           properties: {
             options: [
               "one",
@@ -58,15 +58,6 @@ function App() {
             ]
           }
         },
-        {
-          label: "textarea",
-          name: "textarea",
-          type: ElementType.TEXTAREA,
-          defaultValue: "default",
-          properties: {
-            rows: 10,
-          }
-        }
       ]}
     />
   )

@@ -7,13 +7,15 @@ type _RadioProps = RadioProps & {
     onChange: (e: string) => void;
     defaultValue?: string;
     name: string
+    required?: boolean
+    invalidText?: string
 }
 
-export default function Radio({ onChange, defaultValue, options, name }: Readonly<_RadioProps>) {
+export default function Radio({ onChange, defaultValue, options, name, required, invalidText }: Readonly<_RadioProps>) {
     const [value, setValue] = useState(defaultValue);
     return (
         <>
-            {options.map((option) => (
+            {options.map((option, index) => (
                 <div
                     className="mb-3 form-check"
                     key={option}>
@@ -21,6 +23,7 @@ export default function Radio({ onChange, defaultValue, options, name }: Readonl
                         className="form-check-input"
                         type="radio"
                         name={name}
+                        required={required}
                         checked={value === option}
                         aria-labelledby={"id_" + option}
                         onChange={() => {
@@ -34,6 +37,13 @@ export default function Radio({ onChange, defaultValue, options, name }: Readonl
                     >
                         {option}
                     </label>
+                    {
+                        index === options.length - 1 && required ? (
+                            <div className="invalid-feedback">
+                                {invalidText}
+                            </div>
+                        ) : null
+                    }
                 </div>
             ))}
         </>

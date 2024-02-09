@@ -11,13 +11,16 @@ type Element = {
     name: string,
     type: ElementType,
     properties: SelectProps | TextInputProps | CheckboxProps | RadioProps | TextareaProps,
-    defaultValue?: string | string[]
-
+    defaultValue?: string | string[],
+    invalidText?: string,
+    required?: boolean
 }
 export type FormProps = {
-    title: string,
-    elements: Element[]
-    onButtonClick: (data: any) => void
+    title?: string,
+    elements: Element[],
+    onButtonClick: (data: any) => void,
+    buttonText?: string
+    defaultInvalidText?: string
 }
 
 function get_element_by_type(element: Element, data: any, setData: React.Dispatch<any>): React.ReactNode {
@@ -27,21 +30,25 @@ function get_element_by_type(element: Element, data: any, setData: React.Dispatc
                 <TextInput
                     {...element.properties as TextInputProps}
                     onChange={(changed) => { setData({ ...data, [element.name]: changed }) }}
-                    defaultValue={element.defaultValue as string | undefined} />
+                    defaultValue={element.defaultValue as string | undefined}
+                    required={element.required} />
             )
         case ElementType.SELECT:
             return (
                 <Select
                     {...element.properties as SelectProps}
                     onChange={(changed) => { setData({ ...data, [element.name]: changed }) }}
-                    defaultValue={element.defaultValue} />
+                    defaultValue={element.defaultValue}
+                    required={element.required}
+                />
             )
         case ElementType.CHECKBOX:
             return (
                 <Checkbox
                     {...element.properties as CheckboxProps}
                     onChange={(changed) => { setData({ ...data, [element.name]: changed }) }}
-                    defaultValue={element.defaultValue as string | undefined} />
+                    defaultValue={element.defaultValue as string | undefined}
+                    required={element.required} />
             )
         case ElementType.RADIO:
             return (
@@ -49,19 +56,22 @@ function get_element_by_type(element: Element, data: any, setData: React.Dispatc
                     {...element.properties as RadioProps}
                     onChange={(changed) => { setData({ ...data, [element.name]: changed }) }}
                     defaultValue={element.defaultValue as string | undefined}
-                    name={element.name} />
+                    name={element.name}
+                    required={element.required}
+                    invalidText={element.invalidText} />
             )
         case ElementType.TEXTAREA:
             return (
                 <Textarea
                     {...element.properties as TextareaProps}
                     onChange={(changed) => { setData({ ...data, [element.name]: changed }) }}
-                    defaultValue={element.defaultValue as string | undefined} />
+                    defaultValue={element.defaultValue as string | undefined}
+                    required={element.required} />
             )
     }
 }
 
-function make_element(element: Element, data: any, setData: React.Dispatch<any>): React.ReactNode {
+function make_element(element: Element, data: any, setData: React.Dispatch<any>, defaultInvalidText: string | undefined): React.ReactNode {
     switch (element.type) {
         case ElementType.TEXT_INPUT:
         case ElementType.SELECT:
@@ -73,6 +83,10 @@ function make_element(element: Element, data: any, setData: React.Dispatch<any>)
                 >
                     <label className="form-label">{element.label}</label>
                     {get_element_by_type(element, data, setData)}
+                    <div className="invalid-feedback">
+                        {element.invalidText ?? defaultInvalidText ?? "Please fill this field"}
+                    </div>
+
                 </div>
             )
         case ElementType.CHECKBOX:
@@ -83,6 +97,9 @@ function make_element(element: Element, data: any, setData: React.Dispatch<any>)
                 >
                     {get_element_by_type(element, data, setData)}
                     <label className="form-check-label">{element.label}</label>
+                    <div className="invalid-feedback">
+                        {element.invalidText ?? defaultInvalidText ?? "Please fill this field"}
+                    </div>
                 </div>
             )
         case ElementType.RADIO:
@@ -90,7 +107,12 @@ function make_element(element: Element, data: any, setData: React.Dispatch<any>)
                 <div
                     key={element.label}>
                     <label className="form-label">{element.label}</label>
-                    {get_element_by_type(element, data, setData)}
+                    {
+                        get_element_by_type(
+                            { ...element, ["invalidText"]: element.invalidText ?? defaultInvalidText ?? "Please fill this field" },
+                            data,
+                            setData)
+                    }
                 </div>
             )
 
@@ -117,20 +139,35 @@ function init_data(elements: Element[]): any {
 }
 
 
-export function Form({ title, elements, onButtonClick }: Readonly<FormProps>) {
+export function Form({ title, elements, onButtonClick, buttonText, defaultInvalidText }: Readonly<FormProps>) {
     const [data, setData] = React.useState<any>({})
+    const [formClasses, setFormClasses] = React.useState<string>("")
     useEffect(() => {
         setData(init_data(elements))
     }, [])
     return (
         <>
             <h1>{title}</h1>
-            {elements.map((element) => {
-                return make_element(element, data, setData)
-            })}
-            <button
-                className="btn btn-primary"
-                onClick={() => { onButtonClick(data) }}>Submit</button>
+            <form
+                noValidate
+                className={formClasses}
+                onSubmit={(FormEvent) => {
+                    FormEvent.preventDefault()
+                    FormEvent.stopPropagation()
+                    if (!FormEvent.currentTarget.checkValidity()) {
+                        setFormClasses("was-validated")
+                    } else {
+                        onButtonClick(data)
+                    }
+                }}>
+                {elements.map((element) => {
+                    return make_element(element, data, setData, defaultInvalidText)
+                })}
+                <button
+                    type="submit"
+                    className="btn btn-primary"
+                >{buttonText ?? "Submit"}</button>
+            </form>
         </>
     )
 }
