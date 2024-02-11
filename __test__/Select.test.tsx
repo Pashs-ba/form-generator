@@ -1,8 +1,7 @@
 import { fireEvent, render } from "@testing-library/react"
-import { Form } from "../lib/Form"
-import { ElementType } from "../lib/ElementType"
 import React from "react"
 import '@testing-library/jest-dom'
+import { Form } from "../lib/base/Form"
 
 
 describe("Select", () => {
@@ -14,7 +13,7 @@ describe("Select", () => {
                 onButtonClick={mock}
                 elements={[
                     {
-                        type: ElementType.SELECT,
+                        type: 'select',
                         label: 'select',
                         name: 'select',
                         properties: {
@@ -39,7 +38,7 @@ describe("Select", () => {
                 onButtonClick={mock}
                 elements={[
                     {
-                        type: ElementType.SELECT,
+                        type: 'select',
                         label: 'select',
                         name: 'select',
                         properties: {
@@ -65,7 +64,7 @@ describe("Select", () => {
                 onButtonClick={mock}
                 elements={[
                     {
-                        type: ElementType.SELECT,
+                        type: 'select',
                         label: 'select',
                         name: 'select',
                         properties: {
@@ -90,7 +89,7 @@ describe("Select", () => {
                 onButtonClick={mock}
                 elements={[
                     {
-                        type: ElementType.SELECT,
+                        type: 'select',
                         label: 'select',
                         name: 'select',
                         properties: {
@@ -117,7 +116,7 @@ describe("Select", () => {
                 onButtonClick={mock}
                 elements={[
                     {
-                        type: ElementType.SELECT,
+                        type: 'select',
                         label: 'select',
                         name: 'select',
                         defaultValue: "two",
@@ -143,7 +142,7 @@ describe("Select", () => {
                 onButtonClick={mock}
                 elements={[
                     {
-                        type: ElementType.SELECT,
+                        type: 'select',
                         label: 'select',
                         name: 'select',
                         defaultValue: ["two", "three"],
@@ -169,7 +168,7 @@ describe("Select", () => {
                 onButtonClick={mock}
                 elements={[
                     {
-                        type: ElementType.SELECT,
+                        type: 'select',
                         label: 'select',
                         name: 'select',
                         required: true,

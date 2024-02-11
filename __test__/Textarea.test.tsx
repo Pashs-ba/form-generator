@@ -1,8 +1,7 @@
 import { fireEvent, render } from "@testing-library/react"
-import { Form } from "../lib/Form"
 import React from "react"
-import { ElementType } from "../lib/ElementType"
 import '@testing-library/jest-dom'
+import { Form } from "../lib/base/Form"
 
 
 describe('Textarea', () => {
@@ -14,7 +13,7 @@ describe('Textarea', () => {
                 onButtonClick={mock}
                 elements={[
                     {
-                        type: ElementType.TEXTAREA,
+                        type: 'textarea',
                         label: 'textarea',
                         name: 'textarea',
                         properties: {}
@@ -31,7 +30,7 @@ describe('Textarea', () => {
                 onButtonClick={mock}
                 elements={[
                     {
-                        type: ElementType.TEXTAREA,
+                        type: 'textarea',
                         label: 'textarea',
                         name: 'textarea',
                         properties: {}
@@ -49,7 +48,7 @@ describe('Textarea', () => {
                 onButtonClick={mock}
                 elements={[
                     {
-                        type: ElementType.TEXTAREA,
+                        type: 'textarea',
                         label: 'textarea',
                         name: 'textarea',
                         defaultValue: 'default',
@@ -67,7 +66,7 @@ describe('Textarea', () => {
                 onButtonClick={mock}
                 elements={[
                     {
-                        type: ElementType.TEXTAREA,
+                        type: 'textarea',
                         label: 'textarea',
                         name: 'textarea',
                         invalidText: 'invalid',

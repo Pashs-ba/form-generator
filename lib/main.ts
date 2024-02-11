@@ -1,2 +1,2 @@
-export {Form} from "./Form.tsx";
-export {ElementType} from "./ElementType.ts"
+export {Form} from "./base/Form.tsx";
+export {Manager} from "./base/Manager.tsx";
