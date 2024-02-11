@@ -1,5 +1,5 @@
 
-import { ElementType, Form } from "../lib/main.ts";
+import { Form } from "../lib/main.ts";
 
 function App() {
 
@@ -11,7 +11,6 @@ function App() {
         <div className="card ">
           <div className="card-body">
             <Form
-              title="Регистрация"
               buttonText="Зарегистрироваться"
               defaultInvalidText="Пожалуйста заполните поле"
               onButtonClick={(data) => {
@@ -19,48 +18,46 @@ function App() {
               }}
               elements={[
                 {
-                  type: ElementType.TEXT_INPUT,
-                  label: "Имя",
-                  name: "name",
+                  label: "test",
+                  name: "test",
+                  type: "input",
                   required: true,
-                  properties: {
-                  },
+                  properties: {}
                 },
                 {
-                  type: ElementType.TEXT_INPUT,
-                  label: "Фамилия",
-                  name: "surname",
+                  label: "test2",
+                  name: "test2",
+                  type: "checkbox",
                   required: true,
-                  properties: {
-                  },
+                  defaultValue: "true",
+                  properties: {}
                 },
                 {
-                  type: ElementType.TEXT_INPUT,
-                  label: "Электропочта",
-                  name: "email",
+                  label: "test3",
+                  name: "test3",
+                  type: "radio",
                   required: true,
                   properties: {
-                    type: "email",
-                  },
+                    options: [
+                      "option1",
+                      "option2",
+                      "option3"
+                    ]
+                  }
                 },
                 {
-                  type: ElementType.TEXT_INPUT,
-                  label: "Пароль",
-                  name: "password",
+                  label: "test4",
+                  name: "test4",
+                  type: "select",
                   required: true,
                   properties: {
-                    type: "password",
-                  },
-                },
-                {
-                  type: ElementType.TEXT_INPUT,
-                  label: "Повторите пароль",
-                  name: "password2",
-                  required: true,
-                  properties: {
-                    type: "password",
-                  },
-                },
+                    options: [
+                      { value: "option1", label: "option1" },
+                      { value: "option2", label: "option2" },
+                      { value: "option3", label: "option3" }
+                    ]
+                  }
+                }
               ]}
             />
           </div>

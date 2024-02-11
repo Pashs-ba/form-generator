@@ -1,8 +1,7 @@
 import { fireEvent, render } from "@testing-library/react"
-import { Form } from "../lib/Form"
 import React from "react"
-import { ElementType } from "../lib/ElementType"
 import '@testing-library/jest-dom'
+import { Form } from "../lib/base/Form"
 
 
 describe("Checkbox", () => {
@@ -14,7 +13,7 @@ describe("Checkbox", () => {
                 onButtonClick={mock}
                 elements={[
                     {
-                        type: ElementType.CHECKBOX,
+                        type: 'checkbox',
                         label: 'checkbox',
                         name: 'checkbox',
                         properties: {}
@@ -33,7 +32,7 @@ describe("Checkbox", () => {
                 onButtonClick={mock}
                 elements={[
                     {
-                        type: ElementType.CHECKBOX,
+                        type: 'checkbox',
                         label: 'checkbox',
                         name: 'checkbox',
                         properties: {}
@@ -52,7 +51,7 @@ describe("Checkbox", () => {
                 onButtonClick={mock}
                 elements={[
                     {
-                        type: ElementType.CHECKBOX,
+                        type: 'checkbox',
                         label: 'checkbox',
                         name: 'checkbox',
                         properties: {}
@@ -72,7 +71,7 @@ describe("Checkbox", () => {
                 onButtonClick={mock}
                 elements={[
                     {
-                        type: ElementType.CHECKBOX,
+                        type: 'checkbox',
                         label: 'checkbox',
                         name: 'checkbox',
                         defaultValue: "true",
@@ -92,7 +91,7 @@ describe("Checkbox", () => {
                 onButtonClick={mock}
                 elements={[
                     {
-                        type: ElementType.CHECKBOX,
+                        type: 'checkbox',
                         label: 'checkbox',
                         name: 'checkbox',
                         invalidText: "invalid",

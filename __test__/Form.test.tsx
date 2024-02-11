@@ -1,9 +1,8 @@
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { describe } from 'node:test'
-import { Form } from "../lib/Form"
+import { Form } from "../lib/base/Form"
 import React from 'react'
-import { ElementType } from '../lib/ElementType'
 describe('Form', () => {
   test('Title test', () => {
     const container = render(
@@ -23,7 +22,7 @@ describe('Form', () => {
         onButtonClick={() => { }}
         elements={[
           {
-            type: ElementType.TEXT_INPUT,
+            type: 'input',
             label: 'input',
             name: 'input',
             properties: {}
@@ -51,6 +50,7 @@ describe('Form', () => {
     expect(container.getByText('custom')).toBeInTheDocument()
 
   })
+  
   test('Reqired default error text test', ()=>{
     const mock = jest.fn()
     const container = render(
@@ -60,7 +60,7 @@ describe('Form', () => {
         defaultInvalidText='invalid'
         elements={[
           {
-            type: ElementType.TEXT_INPUT,
+            type: 'input',
             label: 'input',
             name: 'input',
             required: true,

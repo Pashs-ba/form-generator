@@ -1,8 +1,7 @@
 import { fireEvent, render } from "@testing-library/react"
-import { Form } from "../lib/Form"
 import React from "react"
-import { ElementType } from "../lib/ElementType"
 import '@testing-library/jest-dom'
+import { Form } from "../lib/base/Form"
 
 
 describe('Radio', () => {
@@ -14,7 +13,7 @@ describe('Radio', () => {
                 onButtonClick={mock}
                 elements={[
                     {
-                        type: ElementType.RADIO,
+                        type: 'radio',
                         label: 'radio',
                         name: 'radio',
                         properties: {
@@ -39,7 +38,7 @@ describe('Radio', () => {
                 onButtonClick={mock}
                 elements={[
                     {
-                        type: ElementType.RADIO,
+                        type: 'radio',
                         label: 'radio',
                         name: 'radio',
                         properties: {
@@ -66,7 +65,7 @@ describe('Radio', () => {
                 onButtonClick={mock}
                 elements={[
                     {
-                        type: ElementType.RADIO,
+                        type: 'radio',
                         label: 'radio',
                         name: 'radio',
                         defaultValue: "two",
@@ -92,7 +91,7 @@ describe('Radio', () => {
                 onButtonClick={mock}
                 elements={[
                     {
-                        type: ElementType.RADIO,
+                        type: 'radio',
                         label: 'radio',
                         name: 'radio',
                         required: true,

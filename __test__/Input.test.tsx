@@ -1,8 +1,7 @@
 import { fireEvent, render } from "@testing-library/react"
-import { Form } from "../lib/Form"
-import { ElementType } from "../lib/ElementType"
 import React from "react"
 import '@testing-library/jest-dom'
+import { Form } from "../lib/base/Form"
 
 
 describe('Input', () => {
@@ -14,7 +13,7 @@ describe('Input', () => {
                 onButtonClick={mock}
                 elements={[
                     {
-                        type: ElementType.TEXT_INPUT,
+                        type: 'input',
                         label: 'input',
                         name: 'input',
                         properties: {}
@@ -34,7 +33,7 @@ describe('Input', () => {
                 onButtonClick={mock}
                 elements={[
                     {
-                        type: ElementType.TEXT_INPUT,
+                        type: 'input',
                         label: 'input',
                         name: 'input',
                         properties: {}
@@ -54,7 +53,7 @@ describe('Input', () => {
                 onButtonClick={mock}
                 elements={[
                     {
-                        type: ElementType.TEXT_INPUT,
+                        type: 'input',
                         label: 'input',
                         name: 'input',
                         defaultValue: 'default',
@@ -75,7 +74,7 @@ describe('Input', () => {
                 onButtonClick={mock}
                 elements={[
                     {
-                        type: ElementType.TEXT_INPUT,
+                        type: 'input',
                         label: 'input',
                         name: 'input',
                         defaultValue: 'default',
@@ -96,7 +95,7 @@ describe('Input', () => {
                 onButtonClick={mock}
                 elements={[
                     {
-                        type: ElementType.TEXT_INPUT,
+                        type: 'input',
                         label: 'input',
                         name: 'input',
                         invalidText: 'invalid',
